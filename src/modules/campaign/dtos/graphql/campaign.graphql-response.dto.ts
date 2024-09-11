@@ -1,5 +1,7 @@
 import { ResponseBase } from '@libs/api/response.base';
 import { Field, ObjectType } from '@nestjs/graphql';
+import { IsEnum } from 'class-validator';
+import { CampaignProviders } from '@modules/campaign/domain/campaign.types';
 
 @ObjectType()
 export class CampaignGraphqlResponseDto extends ResponseBase {
@@ -34,8 +36,14 @@ export class CampaignGraphqlResponseDto extends ResponseBase {
   })
   endValue: number;
 
-  // @Field({
-  //   description: "Campaign's providers",
-  // })
-  // providers: Providers[];
+  @Field({
+    description: "Campaign's created date",
+  })
+  createdAt: string;
+
+  @Field(() => [String], {
+    description: "Campaign's providers",
+  })
+  @IsEnum(CampaignProviders)
+  providers: CampaignProviders[];
 }

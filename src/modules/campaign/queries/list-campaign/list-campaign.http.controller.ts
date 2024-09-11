@@ -12,7 +12,7 @@ import { CampaignModel } from '../../database/campaign.repository';
 import { ResponseBase } from '@src/libs/api/response.base';
 
 @Controller(routesV1.version)
-export class FindUsersHttpController {
+export class ListCampaignHttpController {
   constructor(private readonly queryBus: QueryBus) {}
 
   @Get(routesV1.campaign.root)
@@ -21,7 +21,7 @@ export class FindUsersHttpController {
     status: HttpStatus.OK,
     type: CampaignPaginatedResponseDto,
   })
-  async findUsers(
+  async listCampaign(
     @Body() request: ListCampaignRequestDto,
     @Query() queryParams: PaginatedQueryRequestDto,
   ): Promise<CampaignPaginatedResponseDto> {
@@ -40,14 +40,14 @@ export class FindUsersHttpController {
     // Whitelisting returned properties
     return new CampaignPaginatedResponseDto({
       ...paginated,
-      data: paginated.data.map((user) => ({
-        ...new ResponseBase(user),
-        name: user.name,
-        keyword: user.keyword,
-        status: user.status,
-        endType: user.endType,
-        endValue: user.endValue,
-        providers: user.providers,
+      data: paginated.data.map((campaign) => ({
+        ...new ResponseBase(campaign),
+        name: campaign.name,
+        keyword: campaign.keyword,
+        status: campaign.status,
+        endType: campaign.endType,
+        endValue: campaign.endValue,
+        providers: campaign.providers,
       })),
     });
   }

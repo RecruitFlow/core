@@ -1,6 +1,6 @@
 import { Logger, Module, Provider } from '@nestjs/common';
 import { CampaignRepository } from './database/campaign.repository';
-import { FindUsersHttpController } from './queries/list-campaign/list-campaign.http.controller';
+import { ListCampaignHttpController } from './queries/list-campaign/list-campaign.http.controller';
 import { ListCampaignQueryHandler } from './queries/list-campaign/list-campaign.query-handler';
 import { CampaignMapper } from './campaign.mapper';
 import { CqrsModule } from '@nestjs/cqrs';
@@ -10,7 +10,7 @@ import { PrismaModule } from '@libs/db/prisma.module';
 import { CreateCampaignService } from './commands/create-campaign/create-campaign.service';
 import { CreateCampaignGraphqlResolver } from './commands/create-campaign//create-campaign.graphql-resolver';
 
-const httpControllers = [FindUsersHttpController];
+const httpControllers = [ListCampaignHttpController];
 
 const graphqlResolvers: Provider[] = [
   ListCampaignGraphqlResolver,

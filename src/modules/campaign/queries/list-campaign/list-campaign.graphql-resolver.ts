@@ -7,13 +7,14 @@ import { PaginatedParams } from '../../../../libs/ddd/query.base';
 import { CampaignModel } from '../../database/campaign.repository';
 import { CampaignPaginatedGraphqlResponseDto } from '../../dtos/graphql/campaign.paginated-gql-response.dto';
 import { ListCampaignQuery } from './list-campaign.query-handler';
+import { ListCampaignGqlRequestDto } from './list-campaign.gql-request.dto';
 
 @Resolver()
 export class ListCampaignGraphqlResolver {
   constructor(private readonly queryBus: QueryBus) {}
   @Query(() => CampaignPaginatedGraphqlResponseDto)
   async listCampaign(
-    @Args('options', { type: () => String })
+    @Args('options', { type: () => ListCampaignGqlRequestDto })
     options: PaginatedParams<ListCampaignQuery>,
   ): Promise<CampaignPaginatedGraphqlResponseDto> {
     const query = new ListCampaignQuery(options);
@@ -33,6 +34,7 @@ export class ListCampaignGraphqlResolver {
         status: campaign.status,
         endType: campaign.endType,
         endValue: campaign.endValue,
+        providers: campaign.providers,
       })),
     });
 
