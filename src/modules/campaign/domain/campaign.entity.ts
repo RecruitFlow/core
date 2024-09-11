@@ -55,7 +55,21 @@ export class CampaignEntity extends AggregateRoot<CampaignProps> {
     this.props.status = newStatus;
   }
 
+  pause(): void {
+    this.changeStatus(CampaignStatus.PAUSED);
+  }
+
+  activate(): void {
+    this.changeStatus(CampaignStatus.ACTIVE);
+  }
+
+  end(): void {
+    this.changeStatus(CampaignStatus.ENDED);
+  }
+
   delete(): void {
+    this.changeStatus(CampaignStatus.DELETED);
+
     this.addEvent(
       new CampaignDeletedDomainEvent({
         aggregateId: this.id,

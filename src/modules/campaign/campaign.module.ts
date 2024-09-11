@@ -7,14 +7,21 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { CAMPAIGN_REPOSITORY } from './campaign.di-tokens';
 import { ListCampaignGraphqlResolver } from './queries/list-campaign/list-campaign.graphql-resolver';
 import { PrismaModule } from '@libs/db/prisma.module';
+import { CreateCampaignService } from './commands/create-campaign/create-campaign.service';
+import { CreateCampaignGraphqlResolver } from './commands/create-campaign//create-campaign.graphql-resolver';
 
 const httpControllers = [FindUsersHttpController];
 
-const graphqlResolvers: Provider[] = [ListCampaignGraphqlResolver];
+const graphqlResolvers: Provider[] = [
+  ListCampaignGraphqlResolver,
+  CreateCampaignGraphqlResolver,
+];
 
 const queryHandlers: Provider[] = [ListCampaignQueryHandler];
 
 const mappers: Provider[] = [CampaignMapper];
+
+const commandHandlers: Provider[] = [CreateCampaignService];
 
 const repositories: Provider[] = [
   { provide: CAMPAIGN_REPOSITORY, useClass: CampaignRepository },
@@ -27,6 +34,7 @@ const repositories: Provider[] = [
     Logger,
     ...repositories,
     ...graphqlResolvers,
+    ...commandHandlers,
     ...queryHandlers,
     ...mappers,
   ],

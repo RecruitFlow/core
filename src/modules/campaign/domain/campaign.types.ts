@@ -12,7 +12,7 @@ export interface CampaignProps
 
 // Properties that are needed for a Campaign creation
 export interface CreateCampaignProps
-  extends Omit<Campaign, 'id' | 'createdAt' | 'updatedAt'> {}
+  extends Omit<Campaign, 'id' | 'createdAt' | 'updatedAt' | 'status'> {}
 
 // Properties used for updating a Campaign
 export interface UpdateCampaignProps {
