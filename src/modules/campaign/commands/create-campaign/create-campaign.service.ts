@@ -31,6 +31,7 @@ export class CreateCampaignService implements ICommandHandler {
       /* Wrapping operation in a transaction to make sure
          that all domain events are processed atomically */
       await this.campaignRepo.create(user);
+
       return Ok(user.id);
     } catch (error: any) {
       if (error instanceof ConflictException) {
