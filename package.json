@@ -39,6 +39,7 @@
     "dependency-cruiser": "^16.4.1",
     "dotenv": "^16.4.5",
     "env-var": "^7.5.0",
+    "kafkajs": "^2.2.4",
     "nanoid": "3",
     "nestjs-console": "^9.0.0",
     "nestjs-request-context": "^3.0.0",
