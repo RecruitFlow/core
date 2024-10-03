@@ -1,5 +1,4 @@
 import { AggregateRoot, AggregateID } from '@libs/ddd';
-// import { Address, AddressProps } from './value-objects/address.value-object';
 import {
   CampaignProps,
   CreateCampaignProps,

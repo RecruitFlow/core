@@ -16,5 +16,10 @@ export const kafkaConfig = {
       groupId: 'finder-consumer',
       name: 'finder-client',
     },
+    candidate: {
+      clientId: 'candidate',
+      groupId: 'candidate',
+      name: 'candidate-client',
+    },
   },
 };

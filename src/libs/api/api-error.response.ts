@@ -13,6 +13,9 @@ export class ApiErrorResponse {
   @ApiProperty({ example: 'YevPQs' })
   readonly correlationId: string;
 
+  @ApiProperty({ example: 'YevPQs', required: false })
+  readonly code?: string;
+
   @ApiProperty({
     example: ['incorrect email'],
     description: 'Optional list of sub-errors',
@@ -27,5 +30,6 @@ export class ApiErrorResponse {
     this.error = body.error;
     this.correlationId = body.correlationId;
     this.subErrors = body.subErrors;
+    this.code = body.code;
   }
 }

@@ -1,0 +1,3 @@
+export const CANDIDATE_REPOSITORY = Symbol('CANDIDATE_REPOSITORY');
+
+export const CANDIDATE_MAPPER = Symbol('CANDIDATE_MAPPER');

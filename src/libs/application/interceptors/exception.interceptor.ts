@@ -42,9 +42,18 @@ export class ExceptionInterceptor implements NestInterceptor {
               }),
             );
           }
+        } else if (err instanceof ExceptionBase) {
+          err = new BadRequestException(
+            new ApiErrorResponse({
+              statusCode: 400,
+              message: err.message,
+              error: err.name,
+              code: err.code,
+              correlationId: err.correlationId,
+            }),
+          );
         }
 
-        // Adding request ID to error message
         if (!err.correlationId) {
           err.correlationId = RequestContextService.getRequestId();
         }
@@ -53,7 +62,7 @@ export class ExceptionInterceptor implements NestInterceptor {
           err.response.correlationId = err.correlationId;
         }
 
-        return throwError(err);
+        return throwError(() => err);
       }),
     );
   }

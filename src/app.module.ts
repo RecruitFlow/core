@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { CampaignModule } from '@modules/campaign/campaign.module';
+import { CandidateModule } from '@modules/candidate/candidate.module';
 import { RequestContextModule } from 'nestjs-request-context';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ContextInterceptor } from './libs/application/context/ContextInterceptor';
@@ -33,6 +34,7 @@ const interceptors = [
     }),
 
     // Modules
+    CandidateModule,
     CampaignModule,
   ],
   controllers: [],
