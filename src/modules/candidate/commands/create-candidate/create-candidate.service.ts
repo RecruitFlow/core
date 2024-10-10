@@ -12,13 +12,17 @@ import {
 } from '@modules/candidate/domain/candidate.errors';
 import { CandidateRepositoryPort } from '@modules/candidate/database/candidate.repository.port';
 import { Prisma } from '@prisma/client';
+import { Logger } from '@nestjs/common';
 
 @CommandHandler(CreateCandidateCommand)
 export class CreateCandidateService implements ICommandHandler {
   constructor(
     @Inject(CANDIDATE_REPOSITORY)
     protected readonly candidateRepo: CandidateRepositoryPort,
-  ) {}
+    private readonly logger: Logger,
+  ) {
+    this.logger = new Logger(CreateCandidateService.name);
+  }
 
   async execute(
     command: CreateCandidateCommand,
@@ -44,6 +48,10 @@ export class CreateCandidateService implements ICommandHandler {
 
     try {
       await this.candidateRepo.create(candidate);
+
+      this.logger.debug(
+        `Candidate created with ID: ${candidate.id} Name: ${candidate.getProps().name}`,
+      );
 
       return Ok(candidate.id);
     } catch (error: any) {

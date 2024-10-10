@@ -11,7 +11,10 @@ import { CommandBus } from '@nestjs/cqrs';
 import { match, Result } from 'oxide.ts';
 import { CreateCandidateCommand } from './create-candidate.command';
 import { CreateCandidateRequestDto } from './create-candidate.request.dto';
-import { CandidateAlreadyExistError } from '@modules/candidate/domain/candidate.errors';
+import {
+  CandidateAlreadyExistError,
+  CandidateCampaignNotFoundError,
+} from '@modules/candidate/domain/candidate.errors';
 import { IdResponse } from '@libs/api/id.response.dto';
 import { AggregateID } from '@libs/ddd';
 import { ApiErrorResponse } from '@src/libs/api/api-error.response';
@@ -38,8 +41,10 @@ export class CreateCandidateHttpController {
   async create(@Body() body: CreateCandidateRequestDto): Promise<IdResponse> {
     const command = new CreateCandidateCommand(body);
 
-    const result: Result<AggregateID, CandidateAlreadyExistError> =
-      await this.commandBus.execute(command);
+    const result: Result<
+      AggregateID,
+      CandidateAlreadyExistError | CandidateCampaignNotFoundError
+    > = await this.commandBus.execute(command);
 
     return match(result, {
       Ok: (id: string) => new IdResponse(id),

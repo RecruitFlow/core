@@ -21,21 +21,21 @@ model Campaign {
 }
 
 model Candidate {
-  id                String       @id @default(cuid())
-  name              String?      @default("Unspecified")
+  id                String        @id @default(cuid())
+  name              String?
   campaignId        String
-  age               Int?         @default(0)
-  workTime          WorkTime     @default(UNDEFINED)
-  workLocation      WorkLocation @default(UNDEFINED)
-  position          String?      @default("Unspecified")
-  salary            Int?         @default(0)
+  age               Int?
+  workTime          WorkTime?
+  workLocation      WorkLocation?
+  position          String?
+  salary            Int?          @default(0)
   skills            String[]
   location          String?
   languages         String[]
-  yearsOfExperience Int?         @default(0)
-  createdAt         DateTime     @default(now())
-  updatedAt         DateTime     @updatedAt
-  campaign          Campaign     @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  yearsOfExperience Int?          @default(0)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  campaign          Campaign      @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   education         Education[]
   experience        Experience[]
 }
@@ -88,12 +88,10 @@ enum WorkTime {
   PART_TIME
   CONTRACT
   INTERNSHIP
-  UNDEFINED
 }
 
 enum WorkLocation {
   REMOTE
   OFFICE
   MIXED
-  UNDEFINED
 }

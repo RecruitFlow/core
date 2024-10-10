@@ -1,0 +1,125 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CampaignGraphqlResponseDto {
+  """Campaign identifier"""
+  id: String!
+
+  """Campaign's name"""
+  name: String!
+
+  """Campaign's keyword"""
+  keyword: String!
+
+  """Campaign's status"""
+  status: String!
+
+  """Campaign's end type"""
+  endType: String!
+
+  """Campaign's end value"""
+  endValue: Float
+
+  """Campaign's created date"""
+  createdAt: String!
+
+  """Campaign's providers"""
+  providers: [String!]!
+}
+
+type CampaignPaginatedGraphqlResponseDto {
+  page: Int!
+  count: Int!
+  limit: Float!
+  data: [CampaignGraphqlResponseDto!]!
+}
+
+type IdGqlResponse {
+  id: String!
+}
+
+type CandidateGraphqlResponseDto {
+  """Candidate identifier"""
+  id: String!
+
+  """Candidate name"""
+  name: String
+
+  """Campaign's identifier"""
+  campaignId: String!
+
+  """Candidate's age"""
+  age: Float
+
+  """Candidate's work location"""
+  workLocation: String!
+
+  """Candidate's work time"""
+  workTime: String!
+
+  """Candidate's position"""
+  position: String
+
+  """Candidate's salary"""
+  salary: Float
+
+  """Candidate's skills"""
+  skills: [String!]!
+
+  """Candidate's location"""
+  location: String
+
+  """Candidate's languages"""
+  languages: [String!]
+
+  """Candidate's years of experience"""
+  yearsOfExperience: Float
+}
+
+type CandidatePaginatedGraphqlResponseDto {
+  page: Int!
+  count: Int!
+  limit: Float!
+  data: [CandidateGraphqlResponseDto!]!
+}
+
+type Query {
+  listCandidates(options: ListCandidatesGqlRequestDto!): CandidatePaginatedGraphqlResponseDto!
+  listCampaign(options: ListCampaignGqlRequestDto!): CampaignPaginatedGraphqlResponseDto!
+}
+
+input ListCandidatesGqlRequestDto {
+  limit: Float!
+  offset: Float!
+  orderBy: OrderBy
+}
+
+input OrderBy {
+  field: String!
+  param: String!
+}
+
+input ListCampaignGqlRequestDto {
+  limit: Float!
+  offset: Float!
+  filters: [Filter!]!
+  orderBy: OrderBy
+}
+
+input Filter {
+  id: String!
+  value: [String!]!
+}
+
+type Mutation {
+  create(input: CreateCampaignGqlRequestDto!): IdGqlResponse!
+}
+
+input CreateCampaignGqlRequestDto {
+  name: String!
+  keyword: String!
+  endValue: Float!
+  endType: String!
+  providers: [String!]!
+}

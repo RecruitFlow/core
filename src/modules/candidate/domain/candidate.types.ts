@@ -1,16 +1,16 @@
 import { AggregateID } from '@libs/ddd';
 export interface CandidateProps {
-  name: string;
+  name: string | null;
   campaignId: AggregateID;
-  age?: number;
-  workTime: WorkTime;
-  workLocation: WorkLocation;
-  position?: string;
-  salary?: number;
+  age: number | null;
+  workTime: WorkTime | null;
+  workLocation: WorkLocation | null;
+  position: string | null;
+  salary: number | null;
   skills: string[];
-  location?: string;
-  languages?: string[];
-  yearsOfExperience?: number;
+  location: string | null;
+  languages: string[];
+  yearsOfExperience: number | null;
   education?: AggregateID[];
   experience?: AggregateID[];
 }
@@ -20,7 +20,6 @@ export interface CreateCandidateProps extends CandidateProps {}
 export enum WorkTime {
   FULL_TIME = 'FULL_TIME',
   PART_TIME = 'PART_TIME',
-  UNDEFINED = 'UNDEFINED',
   CONTRACT = 'CONTRACT',
   INTERNSHIP = 'INTERNSHIP',
 }
@@ -29,5 +28,4 @@ export enum WorkLocation {
   REMOTE = 'REMOTE',
   OFFICE = 'OFFICE',
   MIXED = 'MIXED',
-  UNDEFINED = 'UNDEFINED',
 }

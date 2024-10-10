@@ -18,7 +18,7 @@ export class InitiateJobStep extends Step<CampaignEntity, void> {
 
   async invoke(campaign: CampaignEntity): Promise<void> {
     const { status = false } = await lastValueFrom(
-      this.finderClient.send('finder.create.job', campaign),
+      this.finderClient.send('finder.create.job', campaign.getProps()),
     );
 
     if (!status) {

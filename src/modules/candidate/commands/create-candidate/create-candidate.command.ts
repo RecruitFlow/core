@@ -5,27 +5,27 @@ import {
 } from '@modules/candidate/domain/candidate.types';
 
 export class CreateCandidateCommand extends Command {
-  readonly name: string;
+  readonly name: string | null;
 
   readonly campaignId: AggregateID;
 
-  readonly age?: number;
+  readonly age: number | null;
 
-  readonly workTime: WorkTime;
+  readonly workTime: WorkTime | null;
 
-  readonly workLocation: WorkLocation;
+  readonly workLocation: WorkLocation | null;
 
-  readonly position?: string;
+  readonly position: string | null;
 
-  readonly salary?: number;
+  readonly salary: number | null;
 
   readonly skills: string[];
 
-  readonly location?: string;
+  readonly location: string | null;
 
   readonly languages: string[];
 
-  readonly yearsOfExperience?: number;
+  readonly yearsOfExperience: number | null;
 
   constructor(props: CommandProps<CreateCandidateCommand>) {
     super(props);

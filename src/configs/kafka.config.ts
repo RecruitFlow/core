@@ -18,7 +18,7 @@ export const kafkaConfig = {
     },
     candidate: {
       clientId: 'candidate',
-      groupId: 'candidate',
+      groupId: 'candidate-server',
       name: 'candidate-client',
     },
   },

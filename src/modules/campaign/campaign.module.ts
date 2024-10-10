@@ -60,7 +60,7 @@ const sagasSteps: Provider[] = [
           },
           consumer: {
             groupId: kafkaConfig.services.finder.groupId,
-            allowAutoTopicCreation: true,
+            allowAutoTopicCreation: false,
           },
         },
       },

@@ -30,7 +30,7 @@ const interceptors = [
     CqrsModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true,
+      autoSchemaFile: '../schema.gql',
     }),
 
     // Modules
